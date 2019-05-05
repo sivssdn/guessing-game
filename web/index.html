@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="theme-color" content="#ff9875">
+    <title>Guessing Game</title>
+
+    <link type="text/css" rel="stylesheet" href="materialize/scss/css/materialize.css">
+    <link type="text/css" rel="stylesheet" href="materialize/css/animate.css">
+
+    <style>
+        #body-background{
+            background-color: #ff9875;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23cc0000' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23aa0000' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23d6002b' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23b10022' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d9004b' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23b2003d' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23d3006c' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23ac0057' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23c4008c' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%239e0071' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa00aa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23880088' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .container{
+            width: 94%;
+        }
+    </style>
+</head>
+<body id="body-background">
+
+        <div class="section"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="card-panel materialize-red darken-1 center">
+                        <span class="white-text"><strong>GUESSING GAME</strong></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m4 l4 s12 animated fadeInLeft">
+                    <div class="card red darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">About the game</span>
+                            <div class="divider"></div><br>
+                            <p>
+                                The game is played between two players. The first player thinks of a word, that the second player has to guess the word. The second player can ask up to 20 Yes or No questions, in order to guess the word. The player asking questions can only ask 1 question at a time, and at anytime they can guess the word.
+                                <br><br>
+                                The game ends when either the second player guesses the word correctly, or after 20 questions have been asked and the correct word hasn’t been guessed.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col m4 l4 s12 animated fadeInRight">
+                    <div class="card red">
+                        <div class="card-content white-text">
+                            <span class="card-title">Player 1</span>
+                            <div class="divider"></div><br>
+                            <p>
+                                Steps to play:
+                                <br><br>
+                                1. Click on the start button.<br>
+                                2. Share the code with Player 2 to allow him to join your session.<br>
+                                3. Type the word to be guessed.<br>
+                                4. Answer the Yes/No questions from Player 2.<br>
+                            </p>
+                            <p class="center">
+                                <br><button class="btn btn-large black darken-3"> START </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col m4 l4 s12 animated fadeInRight">
+                    <div class="card red">
+                        <div class="card-content white-text">
+                            <span class="card-title">Player 2</span>
+                            <div class="divider"></div><br>
+                            <p>
+                                Steps to play:
+                                <br><br>
+                                1. Enter the code received from Player 1.<br>
+                                2. Click on the start button.<br>
+                                3. Ask Yes/No questions to Player 1 through the interface.<br>
+                                4. All the best guessing the right word :)<br>
+                            </p>
+                            <p class="center">
+                                <br><button class="btn btn-large black darken-3"> START </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+</body>
+</html>
