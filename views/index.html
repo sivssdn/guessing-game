@@ -9,8 +9,8 @@
     <meta name="theme-color" content="#ff9875">
     <title>Guessing Game</title>
 
-    <link type="text/css" rel="stylesheet" href="materialize/scss/css/materialize.css">
-    <link type="text/css" rel="stylesheet" href="materialize/css/animate.css">
+    <link type="text/css" rel="stylesheet" href="/public/materialize/scss/css/materialize.css">
+    <link type="text/css" rel="stylesheet" href="/public/materialize/css/animate.css">
 
     <style>
         #body-background{
@@ -21,6 +21,17 @@
         }
         .container{
             width: 94%;
+        }
+
+        .input-field label {
+           color: black;
+       }
+       .input-field input[type=text]:focus + label {
+            color: black;
+        }
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid black;
+            box-shadow: 0 1px 0 0 black;
         }
     </style>
 </head>
@@ -56,14 +67,22 @@
                             <p>
                                 Steps to play:
                                 <br><br>
-                                1. Click on the start button.<br>
-                                2. Share the code with Player 2 to allow him to join your session.<br>
-                                3. Type the word to be guessed.<br>
+                                1. Choose your word and enter the word below. <br>
+                                2. Click on the start button below.<br>
+                                3. Share the code with Player 2 to allow him to join your session.<br>
                                 4. Answer the Yes/No questions from Player 2.<br>
                             </p>
-                            <p class="center">
-                                <br><button class="btn btn-large black darken-3"> START </button>
-                            </p>
+                            <form method="post" action="/player-1/login">
+                                <p class="center">
+                                  <div class="input-field">
+                                      <input id="word" name="word" type="text" required>
+                                      <label for="word">Enter choosen word</label>
+                                  </div>
+                                </p>
+                                <p class="center">
+                                    <br><button type="submit" class="btn btn-large black darken-3"> START </button>
+                                </p>
+                          </form>
                         </div>
                     </div>
                 </div>
@@ -75,10 +94,16 @@
                             <p>
                                 Steps to play:
                                 <br><br>
-                                1. Enter the code received from Player 1.<br>
+                                1. Enter the code received session Id from Player 1.<br>
                                 2. Click on the start button.<br>
                                 3. Ask Yes/No questions to Player 1 through the interface.<br>
                                 4. All the best guessing the right word :)<br>
+                            </p>
+                            <p class="center">
+                              <div class="input-field">
+                                  <input id="session_id" name="session_id" class="validate" type="text" required>
+                                  <label for="session_id">Enter Session ID</label>
+                              </div>
                             </p>
                             <p class="center">
                                 <br><button class="btn btn-large black darken-3"> START </button>
@@ -91,4 +116,6 @@
         </div>
 
 </body>
+<script type="text/javascript" src="/public/materialize/scss/js/bin/jquery.js"></script>
+<script type="text/javascript" src="/public/materialize/scss/js/bin/materialize.min.js"></script>
 </html>

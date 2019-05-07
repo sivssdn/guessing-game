@@ -9,8 +9,8 @@
     <meta name="theme-color" content="#ff9875">
     <title>Guessing Game</title>
 
-    <link type="text/css" rel="stylesheet" href="materialize/scss/css/materialize.css">
-    <link type="text/css" rel="stylesheet" href="materialize/css/animate.css">
+    <link type="text/css" rel="stylesheet" href="/public/materialize/scss/css/materialize.css">
+    <link type="text/css" rel="stylesheet" href="/public/materialize/css/animate.css">
 
     <style>
         #body-background{
@@ -31,7 +31,7 @@
 <div class="container">
     <div class="row">
         <div class="card-panel materialize-red darken-1 center">
-            <span class="white-text"><strong>Player 1</strong></span>
+            <span class="white-text"><strong>Player 2</strong></span>
         </div>
     </div>
     <div class="row">
@@ -43,7 +43,22 @@
                 </div>
                 <div class="divider"></div><br>
                 <div class="card-content white-text">
-                    <span class="card-title">Enter the word to be guessed</span>
+                    <span class="card-title">Enter the Session Code</span>
+                    <p class="center">
+                        <div class="input-field">
+                            <input id="session" name="word" class="validate" type="text" required>
+                            <label for="session">Enter sesion code here</label>
+                        </div>
+                        <br><button class="btn btn-large black" type="submit">SUBMIT</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col m4 l4 s12 animated fadeInRight">
+            <div class="card red">
+                <div class="card-content white-text">
+                    <span class="card-title">Guess the word</span>
+                    <div class="divider"></div><br>
                     <p>
                         <div class="input-field">
                             <input id="word" name="word" class="validate" type="text" required>
@@ -56,18 +71,19 @@
                 </div>
             </div>
         </div>
-        <div class="col m8 l8 s12 animated fadeInRight">
+        <div class="col m4 l4 s12 animated fadeInRight">
             <div class="card red">
                 <div class="card-content white-text">
-                    <span class="card-title">Player 2 is asking</span>
+                    <span class="card-title">Question Player 1</span>
                     <div class="divider"></div><br>
                     <p>
-                        <br>
-                        Is the word a hollywood movie name?
+                        <div class="input-field">
+                            <input id="question" name="question" class="validate" type="text" required>
+                            <label for="question">Enter question here</label>
+                        </div>
                     </p>
                     <p class="center">
-                        <br><button class="btn btn-large black darken-3"> YES</button>
-                        <button class="btn btn-large black darken-3"> NO </button>
+                        <br><button class="btn btn-large black" type="submit">SUBMIT</button>
                     </p>
                 </div>
             </div>
@@ -78,6 +94,6 @@
 </div>
 
 </body>
-<script type="text/javascript" src="materialize/scss/js/bin/jquery.js"></script>
-<script type="text/javascript" src="materialize/scss/js/bin/materialize.min.js"></script>
+<script type="text/javascript" src="/public/materialize/scss/js/bin/jquery.js"></script>
+<script type="text/javascript" src="/public/materialize/scss/js/bin/materialize.min.js"></script>
 </html>
