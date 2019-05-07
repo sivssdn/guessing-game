@@ -3,9 +3,7 @@ package handler
 import(
   "database/sql"
 
-	// "encoding/json"
 	"github.com/kataras/iris"
-  "github.com/kataras/iris/sessions"
 	_ "github.com/lib/pq"
 
   model "guessing-game/model"
@@ -27,13 +25,18 @@ func Player1_login(ctx iris.Context){
 	checkErr(err)
 
   session(ctx).Set("session_id", session_id)
+
   ctx.Redirect("/player-1", iris.StatusTemporaryRedirect)
 
 }
 
 func RenderPlayer1Page(ctx iris.Context){
-  print(session(ctx).Get("session_id"))
-  print("----------------------------")
+  session_id,_ := session(ctx).GetInt("session_id")
 
-  ctx.View("player1.html")
+  if session_id >= 0{
+    ctx.ViewData("session_id", session_id)
+    ctx.View("player1.html")
+  }else{
+    ctx.Redirect("/", iris.StatusTemporaryRedirect)
+  }
 }

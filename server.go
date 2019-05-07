@@ -30,17 +30,13 @@ func main(){
 	 	ctx.View("index.html")
 	});
 
- player_1 := app.Party("/player-1")
- {
-	 player_1.Get("/", handler.RenderPlayer1Page)
+ app.Any("/player-1", handler.RenderPlayer1Page)
+ app.Post("/player-1/login", handler.Player1_login)
 
-	 player_1.Post("/login", handler.Player1_login)
- }
+ app.Any("/player-2", handler.RenderPlayer2Page)
+ app.Post("/player-2/login", handler.Player2_login)
+ app.Post("/player-2/guess", handler.Guess)
 
-
- app.Handle("GET", "/player-2", func(ctx iris.Context){
-	 	ctx.View("player2.html")
-	});
 
 	s := sse.New()
 	s.CreateStream("messages")

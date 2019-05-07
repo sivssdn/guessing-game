@@ -22,6 +22,17 @@
         .container{
             width: 94%;
         }
+
+         .input-field label {
+             color: black;
+         }
+         .input-field input[type=text]:focus + label {
+              color: black;
+          }
+         .input-field input[type=text]:focus {
+              border-bottom: 1px solid black;
+              box-shadow: 0 1px 0 0 black;
+          }
     </style>
 </head>
 <body id="body-background">
@@ -39,18 +50,7 @@
             <div class="card red darken-3">
                 <div class="card-content white-text">
                     <span class="card-title">Session Code</span>
-                    <h3>ABC414</h3>
-                </div>
-                <div class="divider"></div><br>
-                <div class="card-content white-text">
-                    <span class="card-title">Enter the Session Code</span>
-                    <p class="center">
-                        <div class="input-field">
-                            <input id="session" name="word" class="validate" type="text" required>
-                            <label for="session">Enter sesion code here</label>
-                        </div>
-                        <br><button class="btn btn-large black" type="submit">SUBMIT</button>
-                    </p>
+                    <h3>{{ .session_id }}</h3>
                 </div>
             </div>
         </div>
@@ -59,15 +59,16 @@
                 <div class="card-content white-text">
                     <span class="card-title">Guess the word</span>
                     <div class="divider"></div><br>
-                    <p>
-                        <div class="input-field">
-                            <input id="word" name="word" class="validate" type="text" required>
-                            <label for="word">Enter Word Here</label>
-                        </div>
-                    </p>
-                    <p class="center">
-                        <br><button class="btn btn-large black" type="submit">SUBMIT</button>
-                    </p>
+                        <p>
+                            <div class="input-field">
+                                <input id="word" name="word" type="text">
+                                <label for="word">Enter Word Here</label>
+                            </div>
+                        </p>
+                        <p class="center">
+                            <br><span id="guess_message_box"></span>
+                            <br><button class="btn btn-large black" id="guess_submit">SUBMIT</button>
+                        </p>
                 </div>
             </div>
         </div>
@@ -96,4 +97,29 @@
 </body>
 <script type="text/javascript" src="/public/materialize/scss/js/bin/jquery.js"></script>
 <script type="text/javascript" src="/public/materialize/scss/js/bin/materialize.min.js"></script>
+<script>
+  document.getElementById("guess_submit").addEventListener("click", function(){
+    var guessed_word = document.getElementById("word").value;
+    if(guessed_word.length > 0){
+
+        var form_data = {};
+        form_data["word"] = guessed_word;
+        $.ajax({
+          url: "/player-2/guess",
+          data: form_data,
+          method: "POST",
+          success: function(response){
+              document.getElementById("guess_message_box").innerHTML = response.status;
+          },
+          error: function(error){
+              document.getElementById("guess_message_box").innerHTML = "Unable to connect over network";
+          }
+        });
+
+    }else{
+      document.getElementById("guess_message_box").innerHTML = "Please enter valid word";
+    }
+
+  });
+</script>
 </html>

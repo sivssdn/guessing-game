@@ -3,6 +3,7 @@ package handler
 import(
   "fmt"
   "os"
+  // "reflect"
 
   "github.com/joho/godotenv"
   "github.com/kataras/iris"
@@ -11,11 +12,12 @@ import(
 
 //session management
 var (
-    cookieNameForSessionID = "guessing_game_session_id_hijack?"
+    cookieNameForSessionID = "guessing_game_session_id_hijack"
     sess                   = sessions.New(sessions.Config{Cookie: cookieNameForSessionID, AllowReclaim: true})
 )
-func session(ctx iris.Context){
-    return sess.Start(ctx)
+func session(ctx iris.Context) *sessions.Session{
+  // fmt.Println(reflect.TypeOf(sess.Start(ctx)))
+  return sess.Start(ctx)
 }
 
 //for error checking

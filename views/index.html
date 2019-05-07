@@ -23,13 +23,13 @@
             width: 94%;
         }
 
-        .input-field label {
+       .input-field label {
            color: black;
        }
        .input-field input[type=text]:focus + label {
             color: black;
         }
-        .input-field input[type=text]:focus {
+       .input-field input[type=text]:focus {
             border-bottom: 1px solid black;
             box-shadow: 0 1px 0 0 black;
         }
@@ -99,6 +99,7 @@
                                 3. Ask Yes/No questions to Player 1 through the interface.<br>
                                 4. All the best guessing the right word :)<br>
                             </p>
+                            <form method="POST" action="/player-2/login">
                             <p class="center">
                               <div class="input-field">
                                   <input id="session_id" name="session_id" class="validate" type="text" required>
