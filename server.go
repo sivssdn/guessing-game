@@ -32,6 +32,8 @@ func main(){
 
  //for server sent events
  s := sse.New()
+ //table init
+ handler.TableInit()
 
  app.Any("/player-1", handler.RenderPlayer1Page)
  app.Post("/player-1/login", func(ctx iris.Context){

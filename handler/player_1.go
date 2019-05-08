@@ -62,3 +62,16 @@ func PlayerStreamQuestions(ctx iris.Context, s *sse.Server){
 					Data: []byte(interaction.QuestionAnswer),
 	})
 }
+
+
+func TableInit(){
+
+  dbCreds := DbCredentialsString()
+	db, err := sql.Open("postgres", dbCreds)
+	defer db.Close()
+	checkErr(err)
+
+  _, err = db.Exec("CREATE TABLE IF NOT EXISTS public.sessions (session_id bigserial, session_word text, game_status integer DEFAULT 1, questions_count integer NOT NULL DEFAULT 0, CONSTRAINT session_id_primary_key PRIMARY KEY (session_id) ) WITH (OIDS=FALSE); ALTER TABLE public.sessions OWNER TO postgres;")
+  checkErr(err)
+
+}
