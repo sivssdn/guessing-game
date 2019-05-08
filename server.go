@@ -1,12 +1,12 @@
 package main
 
 import (
+
 		"github.com/kataras/iris"
 		"github.com/kataras/iris/middleware/recover"
 		"github.com/r3labs/sse"
 
 		handler "guessing-game/handler"
-		"time"
 )
 
 func main(){
@@ -30,28 +30,28 @@ func main(){
 	 	ctx.View("index.html")
 	});
 
+ //for server sent events
+ s := sse.New()
+
  app.Any("/player-1", handler.RenderPlayer1Page)
- app.Post("/player-1/login", handler.Player1_login)
+ app.Post("/player-1/login", func(ctx iris.Context){
+	 	handler.Player1_login(ctx, s)
+ })
 
  app.Any("/player-2", handler.RenderPlayer2Page)
- app.Post("/player-2/login", handler.Player2_login)
  app.Post("/player-2/guess", handler.Guess)
+ app.Post("/player-2/login",func(ctx iris.Context){
+			handler.Player2_login(ctx, s)
+ })
 
+	app.Post("/player-1-question", func(ctx iris.Context){
+		handler.PlayerStreamQuestions(ctx, s)
+	})
+	app.Post("/player-2-question", func(ctx iris.Context){
+		handler.Player2Questions(ctx, s)
+	})
 
-	s := sse.New()
-	s.CreateStream("messages")
-	app.Any("/player-question", iris.FromStd(s.HTTPHandler))
-
-	go func() {
-
-		for {
-				time.Sleep(2 * time.Second)
-				now := time.Now()
-				s.Publish("messages", &sse.Event{
-					Data: []byte(now.String()),
-				})
-		}
-	}()
+	app.Any("/player-messages", iris.FromStd(s.HTTPHandler))
 
  app.Run(iris.Addr(":8180"))
 }

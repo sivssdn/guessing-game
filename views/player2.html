@@ -50,7 +50,7 @@
             <div class="card red darken-3">
                 <div class="card-content white-text">
                     <span class="card-title">Session Code</span>
-                    <h3>{{ .session_id }}</h3>
+                    <h3 id="sess_id">{{ .session_id }}</h3>
                 </div>
             </div>
         </div>
@@ -79,12 +79,13 @@
                     <div class="divider"></div><br>
                     <p>
                         <div class="input-field">
-                            <input id="question" name="question" class="validate" type="text" required>
-                            <label for="question">Enter question here</label>
+                            <input id="question_ans" name="question_ans" type="text" required>
+                            <label for="question_ans">Enter question here</label>
                         </div>
                     </p>
                     <p class="center">
-                        <br><button class="btn btn-large black" type="submit">SUBMIT</button>
+                        <br><span id="message_box"></span>
+                        <br><button class="btn btn-large black" type="submit" id="question_ans_submit">SUBMIT</button>
                     </p>
                 </div>
             </div>
@@ -98,6 +99,7 @@
 <script type="text/javascript" src="/public/materialize/scss/js/bin/jquery.js"></script>
 <script type="text/javascript" src="/public/materialize/scss/js/bin/materialize.min.js"></script>
 <script>
+  //for guessing the word
   document.getElementById("guess_submit").addEventListener("click", function(){
     var guessed_word = document.getElementById("word").value;
     if(guessed_word.length > 0){
@@ -119,7 +121,28 @@
     }else{
       document.getElementById("guess_message_box").innerHTML = "Please enter valid word";
     }
+  });
 
+  //for server sent events, answering questions
+  var source = new EventSource("/player-messages?stream="+document.getElementById("sess_id").innerHTML+"message");
+  source.onmessage = function(event){
+    document.getElementById("message_box").innerHTML = event.data;
+  }
+
+  document.getElementById("question_ans_submit").addEventListener("click", function(){
+    var data = {};
+    data["question_ans"] = document.getElementById("question_ans").value;
+    $.ajax({
+      url: '/player-2-question',
+      method: 'POST',
+      data: data,
+      success: function(){
+        document.getElementById("message_box").innerHTML = "Submitted!";
+      },
+      error: function(){
+        alert('Unable to send request to server')
+      }
+    });
   });
 </script>
 </html>

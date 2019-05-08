@@ -50,7 +50,7 @@
             <div class="card red darken-3">
                 <div class="card-content white-text">
                     <span class="card-title">Session Code</span>
-                    <h3>{{ .session_id }}</h3>
+                    <h3 id="sess_id">{{ .session_id }}</h3>
                 </div>
             </div>
         </div>
@@ -61,11 +61,11 @@
                     <div class="divider"></div><br>
                     <p>
                         <br>
-                        Is the word a hollywood movie name?
+                        <span id="message_box">Questions from player 2 will appear here</span>
                     </p>
                     <p class="center">
-                        <br><button class="btn btn-large black darken-3">YES</button>
-                        <button class="btn btn-large black darken-3">NO</button>
+                        <br><button class="btn btn-large black darken-3" id="ques_submit_yes">YES</button>
+                        <button class="btn btn-large black darken-3" id="ques_submit_no">NO</button>
                     </p>
                 </div>
             </div>
@@ -79,9 +79,29 @@
 <script type="text/javascript" src="/public/materialize/scss/js/bin/jquery.js"></script>
 <script type="text/javascript" src="/public/materialize/scss/js/bin/materialize.min.js"></script>
 <script>
-  var source = new EventSource("/player-question?stream=messages");
+  var source = new EventSource("/player-messages?stream="+document.getElementById("sess_id").innerHTML+"message");
   source.onmessage = function(event){
-    console.dir(event.data);
+    document.getElementById("message_box").innerHTML = event.data;
+  }
+
+  document.getElementById("ques_submit_yes").addEventListener("click", function(){
+    send_interaction("YES");
+  });
+  document.getElementById("ques_submit_no").addEventListener("click", function(){
+    send_interaction("NO");
+  });
+
+  function send_interaction(response){
+    var data = {};
+    data["question_ans"] = document.getElementById("message_box").innerHTML+" : "+response;
+    $.ajax({
+      url: '/player-1-question',
+      method: 'POST',
+      data: data,
+      error: function(){
+        alert('Unable to send request to server')
+      }
+    });
   }
 </script>
 </html>

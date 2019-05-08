@@ -7,3 +7,7 @@ type Word struct{
 type PlayerSession struct{
   SessionId   string  `form:"session_id"`
 }
+
+type PlayerInteraction struct{
+  QuestionAnswer    string   `form:"question_ans"`
+}
